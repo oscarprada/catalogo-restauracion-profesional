@@ -1,0 +1,1 @@
+{"scripts":{"dev":"npm --prefix frontend run dev","build":"npm --prefix frontend run build","api":"npm --prefix backend run dev","install:all":"npm install --prefix frontend && npm install --prefix backend"},"private":true,"name":"catalogo-restauracion-profesional","version":"1.0.0"}

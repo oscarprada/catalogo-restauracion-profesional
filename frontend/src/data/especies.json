@@ -1,0 +1,86 @@
+[
+  {
+    "id": "rhizophora-mangle",
+    "codigo": "ESP-001",
+    "nombreComun": "Mangle rojo",
+    "nombreCientifico": "Rhizophora mangle",
+    "familia": "Rhizophoraceae",
+    "ecosistema": "Manglar",
+    "estado": "Preocupación menor",
+    "propagacion": "Propágulo vivíparo",
+    "zona": "Costa Pacífica colombiana",
+    "descripcion": "Especie clave en procesos de restauración de manglar. Sus raíces aéreas estabilizan sedimentos y ofrecen refugio para fauna acuática.",
+    "cuidados": "Recolectar propágulos maduros, sembrar en sustrato húmedo y mantener salinidad similar al sitio de origen.",
+    "usos": "Restauración de bordes de esteros, protección costera, recuperación de hábitat y educación ambiental.",
+    "fenologia": "Producción de propágulos variable según condiciones locales.",
+    "mapa": "Zonas estuarinas y costeras del Pacífico.",
+    "imagen": "assets/mangle-rojo.svg",
+    "galeria": [
+      "assets/mangle-rojo.svg"
+    ],
+    "referencias": "Ficha demostrativa. Reemplazar por información técnica oficial."
+  },
+  {
+    "id": "avicennia-germinans",
+    "codigo": "ESP-002",
+    "nombreComun": "Mangle negro",
+    "nombreCientifico": "Avicennia germinans",
+    "familia": "Acanthaceae",
+    "ecosistema": "Manglar",
+    "estado": "Preocupación menor",
+    "propagacion": "Semilla / plántula",
+    "zona": "Áreas intermareales",
+    "descripcion": "Mangle con neumatóforos que favorecen el intercambio gaseoso en suelos saturados. Útil en zonas con inundación periódica.",
+    "cuidados": "Evitar desecación del material vegetal y seleccionar sitios con condiciones adecuadas de inundación.",
+    "usos": "Recuperación de zonas degradadas, estabilización de sustratos y conectividad ecológica.",
+    "fenologia": "Depende de la dinámica local de mareas y clima.",
+    "mapa": "Bordes interiores de manglar y zonas lodosas.",
+    "imagen": "assets/mangle-negro.svg",
+    "galeria": [
+      "assets/mangle-negro.svg"
+    ],
+    "referencias": "Ficha demostrativa. Reemplazar por información técnica oficial."
+  },
+  {
+    "id": "laguncularia-racemosa",
+    "codigo": "ESP-003",
+    "nombreComun": "Mangle blanco",
+    "nombreCientifico": "Laguncularia racemosa",
+    "familia": "Combretaceae",
+    "ecosistema": "Manglar",
+    "estado": "Preocupación menor",
+    "propagacion": "Semilla / vivero",
+    "zona": "Manglares y bordes de transición",
+    "descripcion": "Especie frecuente en áreas de transición del manglar. Puede emplearse en procesos de restauración donde las condiciones del sitio sean favorables.",
+    "cuidados": "Mantener humedad constante, evitar compactación y proteger plántulas en fases iniciales.",
+    "usos": "Restauración ecológica, enriquecimiento de áreas intervenidas y recuperación de cobertura vegetal.",
+    "fenologia": "Variable según región y régimen hídrico.",
+    "mapa": "Áreas de transición entre manglar y tierra firme.",
+    "imagen": "assets/mangle-blanco.svg",
+    "galeria": [
+      "assets/mangle-blanco.svg"
+    ],
+    "referencias": "Ficha demostrativa. Reemplazar por información técnica oficial."
+  },
+  {
+    "id": "pelliciera-rhizophorae",
+    "codigo": "ESP-004",
+    "nombreComun": "Mangle piñuelo",
+    "nombreCientifico": "Pelliciera rhizophorae",
+    "familia": "Tetrameristaceae",
+    "ecosistema": "Manglar",
+    "estado": "Vulnerable / revisar fuente oficial",
+    "propagacion": "Semilla",
+    "zona": "Pacífico tropical",
+    "descripcion": "Especie de interés para conservación y restauración por su distribución restringida. Requiere especial atención en la selección del sitio.",
+    "cuidados": "Usar material vegetal local, documentar procedencia y realizar seguimiento periódico de supervivencia.",
+    "usos": "Restauración especializada, conservación de diversidad y fortalecimiento de viveros de especies nativas.",
+    "fenologia": "Debe validarse con registros locales del área protegida.",
+    "mapa": "Sectores específicos del litoral Pacífico.",
+    "imagen": "assets/mangle-pinuelo.svg",
+    "galeria": [
+      "assets/mangle-pinuelo.svg"
+    ],
+    "referencias": "Ficha demostrativa. Validar con profesional de restauración."
+  }
+]
