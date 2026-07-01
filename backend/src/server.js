@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 
 import pool from "./config/db.js";
 import especiesRoutes from "./routes/especies.routes.js";
+import protectedAreasRoutes from "./routes/protectedAreas.routes.js";
 
 dotenv.config();
 
@@ -11,6 +12,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+
 
 app.get("/", (req, res) => {
   res.json({
@@ -39,6 +41,7 @@ app.get("/api/health", async (req, res) => {
 });
 
 app.use("/api/especies", especiesRoutes);
+app.use("/api/protected-areas", protectedAreasRoutes);
 
 const PORT = process.env.PORT || 3000;
 

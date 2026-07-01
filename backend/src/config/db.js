@@ -1,25 +1,15 @@
-import pg from "pg";
-import dotenv from "dotenv";
-
-dotenv.config();
-
-const { Pool } = pg;
+import { Pool } from "pg";
 
 const pool = new Pool({
-  host: process.env.DB_HOST,
-  port: Number(process.env.DB_PORT),
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
+  host: "localhost",
+  port: 5432,
+  user: "postgres",
+  password: "albanta26",
+  database: "catalogo_restauracion",
 });
 
-pool.on("connect", () => {
-  console.log("✅ PostgreSQL conectado.");
-});
-
-pool.on("error", (err) => {
-  console.error("❌ Error de PostgreSQL:", err);
-});
+export async function query(text, params) {
+  return pool.query(text, params);
+}
 
 export default pool;
-
