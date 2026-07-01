@@ -233,3 +233,27 @@ VALUES
 ('secondary_color', '#2cab87', 'Color turquesa institucional.'),
 ('text_color', '#000000', 'Color principal de texto.');
 
+CREATE TABLE IF NOT EXISTS protected_area_species (
+
+    id SERIAL PRIMARY KEY,
+
+    protected_area_id INTEGER NOT NULL,
+
+    species_id INTEGER NOT NULL,
+
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT fk_pas_area
+        FOREIGN KEY (protected_area_id)
+        REFERENCES protected_areas(id)
+        ON DELETE CASCADE,
+
+    CONSTRAINT fk_pas_species
+        FOREIGN KEY (species_id)
+        REFERENCES species(id)
+        ON DELETE CASCADE,
+
+    CONSTRAINT uq_area_species
+        UNIQUE(protected_area_id, species_id)
+
+);
