@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 
 import Layout from "../components/Layout";
 import Breadcrumb from "../components/Breadcrumb";
+import SpeciesGallery from "../components/SpeciesGallery";
+import ImageUploader from "../components/ImageUploader";
 
 function SpeciesDetailPage() {
 
@@ -138,6 +140,12 @@ function SpeciesDetailPage() {
           <p>{species.observations || "Sin información."}</p>
         </section>
 
+        <SpeciesGallery speciesId={species.id} />
+
+<ImageUploader
+  speciesId={species.id}
+  onUpload={() => window.location.reload()}
+/>
       </div>
 
     </Layout>
