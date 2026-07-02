@@ -9,6 +9,7 @@ import protectedAreaSpeciesRoutes from "./routes/protectedAreaSpecies.routes.js"
 import speciesImagesRoutes from "./routes/speciesImages.routes.js";
 import speciesUploadRoutes from "./routes/speciesUpload.routes.js";
 import path from "path";
+import speciesExperiencesRoutes from "./routes/speciesExperiences.routes.js";
 
 dotenv.config();
 
@@ -50,6 +51,7 @@ app.get("/api/health", async (req, res) => {
 app.use("/api/species", speciesRoutes);
 app.use("/api/species", speciesImagesRoutes);
 app.use("/api/species", speciesUploadRoutes);
+app.use("/api/species", speciesExperiencesRoutes);
 app.use("/api/protected-areas", protectedAreasRoutes);
 app.use("/api/protected-areas", protectedAreaSpeciesRoutes);
 

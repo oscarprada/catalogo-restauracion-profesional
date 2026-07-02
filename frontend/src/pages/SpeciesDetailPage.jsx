@@ -5,6 +5,7 @@ import Layout from "../components/Layout";
 import Breadcrumb from "../components/Breadcrumb";
 import SpeciesGallery from "../components/SpeciesGallery";
 import ImageUploader from "../components/ImageUploader";
+import SpeciesExperiences from "../components/SpeciesExperiences";
 
 function SpeciesDetailPage() {
 
@@ -146,6 +147,7 @@ function SpeciesDetailPage() {
   speciesId={species.id}
   onUpload={() => window.location.reload()}
 />
+<SpeciesExperiences speciesId={species.id} />
       </div>
 
     </Layout>
