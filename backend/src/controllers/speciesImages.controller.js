@@ -30,3 +30,45 @@ export async function getSpeciesImages(req, res) {
   }
 
 }
+
+export async function deleteSpeciesImage(req, res) {
+
+  try {
+
+    const { imageId } = req.params;
+
+    const result = await query(
+      `
+      DELETE FROM species_images
+      WHERE id = $1
+      RETURNING *;
+      `,
+      [imageId]
+    );
+
+    if (result.rows.length === 0) {
+
+      return res.status(404).json({
+        success: false,
+        message: "Imagen no encontrada."
+      });
+
+    }
+
+    res.json({
+      success: true,
+      message: "Imagen eliminada."
+    });
+
+  } catch (error) {
+
+    console.error(error);
+
+    res.status(500).json({
+      success: false,
+      message: error.message
+    });
+
+  }
+
+}

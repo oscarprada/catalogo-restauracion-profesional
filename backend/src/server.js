@@ -8,6 +8,7 @@ import protectedAreasRoutes from "./routes/protectedAreas.routes.js";
 import protectedAreaSpeciesRoutes from "./routes/protectedAreaSpecies.routes.js";
 import speciesImagesRoutes from "./routes/speciesImages.routes.js";
 import speciesUploadRoutes from "./routes/speciesUpload.routes.js";
+import path from "path";
 
 dotenv.config();
 
@@ -15,7 +16,10 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
-
+app.use(
+  "/uploads",
+  express.static(path.resolve("uploads"))
+);
 
 app.get("/", (req, res) => {
   res.json({

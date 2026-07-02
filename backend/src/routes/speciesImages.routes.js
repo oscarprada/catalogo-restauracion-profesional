@@ -1,9 +1,16 @@
 import { Router } from "express";
-import { getSpeciesImages } from "../controllers/speciesImages.controller.js";
+import {
+  getSpeciesImages,
+  deleteSpeciesImage
+} from "../controllers/speciesImages.controller.js";
 
 const router = Router();
 
 router.get("/:id/images", getSpeciesImages);
 
-export default router;
+router.delete(
+  "/images/:imageId",
+  deleteSpeciesImage
+);
 
+export default router;
