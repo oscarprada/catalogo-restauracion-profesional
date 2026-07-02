@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomePage from "../pages/HomePage";
 import ProtectedAreasPage from "../pages/ProtectedAreasPage";
 import SpeciesPage from "../pages/SpeciesPage";
+import SpeciesDetailPage from "../pages/SpeciesDetailPage";
 
 function AppRouter() {
   return (
@@ -25,6 +26,11 @@ function AppRouter() {
           element={<SpeciesPage />}
         />
 
+        <Route
+          path="/species/:id"
+          element={<SpeciesDetailPage />}
+        />
+
       </Routes>
 
     </BrowserRouter>
@@ -32,6 +38,7 @@ function AppRouter() {
 }
 
 export default AppRouter;
+
 
 
 

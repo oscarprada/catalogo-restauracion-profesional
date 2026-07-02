@@ -3,9 +3,10 @@ import cors from "cors";
 import dotenv from "dotenv";
 
 import pool from "./config/db.js";
-import especiesRoutes from "./routes/especies.routes.js";
+import speciesRoutes from "./routes/species.routes.js";
 import protectedAreasRoutes from "./routes/protectedAreas.routes.js";
 import protectedAreaSpeciesRoutes from "./routes/protectedAreaSpecies.routes.js";
+import speciesImagesRoutes from "./routes/speciesImages.routes.js";
 
 dotenv.config();
 
@@ -41,7 +42,8 @@ app.get("/api/health", async (req, res) => {
   }
 });
 
-app.use("/api/especies", especiesRoutes);
+app.use("/api/species", speciesRoutes);
+app.use("/api/species", speciesImagesRoutes);
 app.use("/api/protected-areas", protectedAreasRoutes);
 app.use("/api/protected-areas", protectedAreaSpeciesRoutes);
 

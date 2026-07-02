@@ -1,1 +1,0 @@
-import {Router} from 'express';import {listar,crear} from '../controllers/especies.controller.js';const r=Router();r.get('/',listar);r.post('/',crear);export default r;

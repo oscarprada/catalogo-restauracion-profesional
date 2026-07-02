@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import ProtectedAreaCard from "../components/ProtectedAreaCard";
+import Breadcrumb from "../components/Breadcrumb";
 import { getProtectedAreas } from "../services/protectedAreasService";
 
 function ProtectedAreasPage() {
@@ -25,18 +26,23 @@ function ProtectedAreasPage() {
   return (
     <Layout title="Áreas Protegidas">
 
+      <Breadcrumb
+        items={[
+          { label: "Inicio", to: "/" },
+          { label: "Áreas Protegidas" }
+        ]}
+      />
+
       {loading ? (
         <p>Cargando áreas protegidas...</p>
       ) : (
         <div className="areas-grid">
-
           {areas.map((area) => (
             <ProtectedAreaCard
               key={area.id}
               area={area}
             />
           ))}
-
         </div>
       )}
 
@@ -45,3 +51,4 @@ function ProtectedAreasPage() {
 }
 
 export default ProtectedAreasPage;
+
