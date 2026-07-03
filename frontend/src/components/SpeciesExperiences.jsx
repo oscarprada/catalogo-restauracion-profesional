@@ -3,6 +3,11 @@ import {
   getSpeciesExperiences,
   createSpeciesExperience
 } from "../services/speciesExperiencesService";
+import Card from "./Card";
+import Section from "./Section";
+import PrimaryButton from "./PrimaryButton";
+import TextInput from "./TextInput";
+import TextArea from "./TextArea";
 
 function SpeciesExperiences({ speciesId }) {
 
@@ -75,11 +80,13 @@ function SpeciesExperiences({ speciesId }) {
 
   return (
 
-    <section>
+  <Section title="Experiencias de propagación">
 
-      <h2>Experiencias de propagación</h2>
+    <Card>
 
-      <input
+      <h3>Nueva experiencia</h3>
+
+      <TextInput
         placeholder="Título"
         value={form.title}
         onChange={(e)=>
@@ -90,7 +97,9 @@ function SpeciesExperiences({ speciesId }) {
         }
       />
 
-      <input
+      <br /><br />
+
+      <TextInput
         placeholder="Año"
         value={form.experience_year}
         onChange={(e)=>
@@ -101,7 +110,9 @@ function SpeciesExperiences({ speciesId }) {
         }
       />
 
-      <input
+      <br /><br />
+
+      <TextInput
         placeholder="Ubicación"
         value={form.location}
         onChange={(e)=>
@@ -112,7 +123,33 @@ function SpeciesExperiences({ speciesId }) {
         }
       />
 
-      <textarea
+      <br /><br />
+<TextInput
+  placeholder="Vivero"
+  value={form.nursery_name}
+  onChange={(e)=>
+    setForm({
+      ...form,
+      nursery_name:e.target.value
+    })
+  }
+/>
+
+<br /><br />
+
+<TextInput
+  placeholder="Responsable"
+  value={form.responsible_person}
+  onChange={(e)=>
+    setForm({
+      ...form,
+      responsible_person:e.target.value
+    })
+  }
+/>
+
+<br /><br />
+      <TextArea
         placeholder="Objetivo"
         value={form.objective}
         onChange={(e)=>
@@ -122,40 +159,104 @@ function SpeciesExperiences({ speciesId }) {
           })
         }
       />
+      <br /><br />
 
-      <button onClick={saveExperience}>
+<TextArea
+  placeholder="Metodología"
+  value={form.methodology}
+  onChange={(e)=>
+    setForm({
+      ...form,
+      methodology:e.target.value
+    })
+  }
+/>
+      <br /><br />
+
+    <br /><br />
+
+<TextArea
+  placeholder="Resultados"
+  value={form.results}
+  onChange={(e)=>
+    setForm({
+      ...form,
+      results:e.target.value
+    })
+  }
+/>
+
+<br /><br />
+
+<TextArea
+  placeholder="Lecciones aprendidas"
+  value={form.lessons_learned}
+  onChange={(e)=>
+    setForm({
+      ...form,
+      lessons_learned:e.target.value
+    })
+  }
+/>
+<br /><br />
+
+<TextArea
+  placeholder="Observaciones"
+  value={form.observations}
+  onChange={(e)=>
+    setForm({
+      ...form,
+      observations:e.target.value
+    })
+  }
+/>
+      <PrimaryButton onClick={saveExperience}>
         Guardar experiencia
-      </button>
+      </PrimaryButton>
 
-      <hr />
+    </Card>
 
-      {experiences.length===0 && (
+    <br />
+
+    {experiences.length===0 && (
+
+      <Card>
+
         <p>No existen experiencias registradas.</p>
-      )}
 
-      {experiences.map((item)=>(
+      </Card>
 
-        <article key={item.id}>
+    )}
 
-          <h3>{item.title}</h3>
+    {experiences.map((item)=>(
 
-          <p>
-            <strong>Año:</strong> {item.experience_year}
-          </p>
+      <Card key={item.id}>
 
-          <p>
-            <strong>Ubicación:</strong> {item.location}
-          </p>
+        <h3>{item.title}</h3>
 
-          <p>{item.objective}</p>
+        <p>
 
-        </article>
+          <strong>Año:</strong> {item.experience_year}
 
-      ))}
+        </p>
 
-    </section>
+        <p>
 
-  );
+          <strong>Ubicación:</strong> {item.location}
+
+        </p>
+
+        <p>{item.objective}</p>
+
+      </Card>
+
+    ))}
+
+  </Section>
+
+);
+
+  
 
 }
 
