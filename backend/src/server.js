@@ -10,6 +10,8 @@ import speciesImagesRoutes from "./routes/speciesImages.routes.js";
 import speciesUploadRoutes from "./routes/speciesUpload.routes.js";
 import path from "path";
 import speciesExperiencesRoutes from "./routes/speciesExperiences.routes.js";
+import speciesReferencesRoutes from "./routes/speciesReferences.routes.js";
+import publicationRoutes from "./routes/publication.routes.js";
 
 dotenv.config();
 
@@ -52,8 +54,12 @@ app.use("/api/species", speciesRoutes);
 app.use("/api/species", speciesImagesRoutes);
 app.use("/api/species", speciesUploadRoutes);
 app.use("/api/species", speciesExperiencesRoutes);
+app.use("/api/species", speciesReferencesRoutes);
+
 app.use("/api/protected-areas", protectedAreasRoutes);
 app.use("/api/protected-areas", protectedAreaSpeciesRoutes);
+
+app.use("/api/publications", publicationRoutes);
 
 const PORT = process.env.PORT || 3000;
 

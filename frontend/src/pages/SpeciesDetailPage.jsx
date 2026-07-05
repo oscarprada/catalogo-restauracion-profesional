@@ -6,6 +6,7 @@ import Breadcrumb from "../components/Breadcrumb";
 import SpeciesGallery from "../components/SpeciesGallery";
 import ImageUploader from "../components/ImageUploader";
 import SpeciesExperiences from "../components/SpeciesExperiences";
+import SpeciesReferences from "../components/SpeciesReferences";
 
 function SpeciesDetailPage() {
 
@@ -149,6 +150,8 @@ function SpeciesDetailPage() {
 />
 <SpeciesExperiences speciesId={species.id} />
       </div>
+
+  <SpeciesReferences speciesId={species.id} />
 
     </Layout>
 
