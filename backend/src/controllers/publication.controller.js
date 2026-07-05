@@ -41,6 +41,7 @@ export async function publishProtectedArea(req, res) {
 
         for (const item of species) {
 
+            // Imágenes
             const images = await query(
                 `
                 SELECT *
@@ -53,6 +54,34 @@ export async function publishProtectedArea(req, res) {
             );
 
             item.images = images.rows;
+
+            // Experiencias
+            const experiences = await query(
+                `
+                SELECT *
+                FROM species_experiences
+                WHERE species_id = $1
+                ORDER BY experience_year DESC NULLS LAST,
+                         created_at DESC;
+                `,
+                [item.id]
+            );
+
+            item.experiences = experiences.rows;
+
+            // Referencias
+            const references = await query(
+                `
+                SELECT *
+                FROM species_references
+                WHERE species_id = $1
+                ORDER BY publication_year DESC NULLS LAST,
+                         created_at DESC;
+                `,
+                [item.id]
+            );
+
+            item.references = references.rows;
 
         }
 
@@ -80,4 +109,5 @@ export async function publishProtectedArea(req, res) {
     }
 
 }
+
 
