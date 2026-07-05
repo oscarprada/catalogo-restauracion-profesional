@@ -11,11 +11,27 @@ export async function generateCatalog(area, species) {
         `catalog-${area.id}`
     );
 
-    await fs.mkdir(
+    const assetsFolder = path.join(
         publicationFolder,
-        {
-            recursive: true
-        }
+        "assets",
+        "images"
+    );
+
+    await fs.mkdir(assetsFolder, {
+        recursive: true
+    });
+
+    await fs.copyFile(
+        path.join(
+            process.cwd(),
+            "assets",
+            "images",
+            "parques-logo.png"
+        ),
+        path.join(
+            assetsFolder,
+            "parques-logo.png"
+        )
     );
 
     const html = buildCatalogHTML(
@@ -38,5 +54,3 @@ export async function generateCatalog(area, species) {
     };
 
 }
-
-

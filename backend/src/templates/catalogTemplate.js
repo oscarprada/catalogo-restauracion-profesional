@@ -46,9 +46,7 @@ export function buildCatalogHTML(area, species) {
 <style>
 
 *{
-
     box-sizing:border-box;
-
 }
 
 body{
@@ -75,17 +73,25 @@ body{
 
 header{
 
-    text-align:center;
+    background:white;
+
+    border-radius:12px;
 
     padding:40px;
 
-    background:white;
-
-    border-radius:10px;
-
     margin-bottom:40px;
 
-    box-shadow:0 2px 8px rgba(0,0,0,.08);
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
+
+    text-align:center;
+
+}
+
+.logo{
+
+    width:130px;
+
+    margin-bottom:20px;
 
 }
 
@@ -93,17 +99,53 @@ h1{
 
     color:#2cab87;
 
-    margin-bottom:10px;
+    margin-bottom:5px;
 
 }
 
 h2{
 
+    color:#71b956;
+
+    margin-top:0;
+
+}
+
+.area-name{
+
+    font-size:28px;
+
+    margin-top:30px;
+
+    color:#222;
+
+}
+
+.description{
+
+    margin-top:20px;
+
+    color:#555;
+
+    line-height:1.7;
+
+}
+
+section{
+
+    margin-top:50px;
+
+}
+
+.section-title{
+
     color:#2cab87;
 
-    border-bottom:2px solid #2cab87;
+    border-bottom:3px solid #2cab87;
 
-    padding-bottom:8px;
+    padding-bottom:10px;
+
+    margin-bottom:25px;
 
 }
 
@@ -111,11 +153,11 @@ h2{
 
     background:white;
 
-    border-radius:10px;
+    border-radius:12px;
 
-    padding:20px;
+    padding:25px;
 
-    margin-top:20px;
+    margin-bottom:25px;
 
     box-shadow:0 2px 8px rgba(0,0,0,.08);
 
@@ -131,19 +173,37 @@ h2{
 
 <header>
 
+<img
+    src="assets/images/parques-logo.png"
+    class="logo"
+    alt="Parques Nacionales Naturales de Colombia"
+/>
+
 <h1>Parques Nacionales Naturales de Colombia</h1>
 
 <h2>Catálogo de Restauración Ecológica</h2>
 
-<h3>${area.name}</h3>
+<div class="area-name">
 
-<p>${area.description ?? ""}</p>
+${area.name}
+
+</div>
+
+<div class="description">
+
+${area.description ?? ""}
+
+</div>
 
 </header>
 
 <section>
 
-<h2>Especies del área protegida</h2>
+<h2 class="section-title">
+
+Especies del Área Protegida
+
+</h2>
 
 ${speciesHTML}
 
@@ -158,3 +218,4 @@ ${speciesHTML}
 `;
 
 }
+
