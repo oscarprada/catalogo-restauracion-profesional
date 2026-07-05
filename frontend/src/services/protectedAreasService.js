@@ -12,14 +12,30 @@ export async function getProtectedAreas() {
 
 }
 
+export async function getProtectedAreaById(id) {
+
+  const response = await fetch(`${API_URL}/${id}`);
+
+  if (!response.ok) {
+    throw new Error("No fue posible obtener el área protegida.");
+  }
+
+  return await response.json();
+
+}
+
 export async function createProtectedArea(area) {
 
   const response = await fetch(API_URL, {
+
     method: "POST",
+
     headers: {
       "Content-Type": "application/json"
     },
+
     body: JSON.stringify(area)
+
   });
 
   if (!response.ok) {
@@ -33,11 +49,15 @@ export async function createProtectedArea(area) {
 export async function updateProtectedArea(id, area) {
 
   const response = await fetch(`${API_URL}/${id}`, {
+
     method: "PUT",
+
     headers: {
       "Content-Type": "application/json"
     },
+
     body: JSON.stringify(area)
+
   });
 
   if (!response.ok) {
@@ -51,7 +71,9 @@ export async function updateProtectedArea(id, area) {
 export async function deleteProtectedArea(id) {
 
   const response = await fetch(`${API_URL}/${id}`, {
+
     method: "DELETE"
+
   });
 
   if (!response.ok) {

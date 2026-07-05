@@ -1,6 +1,8 @@
+import { Link } from "react-router-dom";
+
 import PrimaryButton from "./PrimaryButton";
 
-function AdminProtectedAreaCard({ area }) {
+function AdminProtectedAreaCard({ area, onDelete }) {
 
   return (
 
@@ -24,19 +26,19 @@ function AdminProtectedAreaCard({ area }) {
 
         <div className="button-group">
 
-          <PrimaryButton>
+          <Link to={`/admin/areas/${area.id}/edit`}>
 
-            Abrir
+            <PrimaryButton>
 
-          </PrimaryButton>
+              Editar
 
-          <PrimaryButton>
+            </PrimaryButton>
 
-            Editar
+          </Link>
 
-          </PrimaryButton>
-
-          <PrimaryButton>
+          <PrimaryButton
+            onClick={() => onDelete(area)}
+          >
 
             Eliminar
 
@@ -53,4 +55,5 @@ function AdminProtectedAreaCard({ area }) {
 }
 
 export default AdminProtectedAreaCard;
+
 

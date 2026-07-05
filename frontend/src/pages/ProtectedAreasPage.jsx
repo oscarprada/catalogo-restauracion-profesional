@@ -1,6 +1,8 @@
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import Layout from "../components/Layout";
+import Breadcrumb from "../components/Breadcrumb";
 import PrimaryButton from "../components/PrimaryButton";
 import ProtectedAreaCard from "../components/ProtectedAreaCard";
 
@@ -8,7 +10,7 @@ import {
   getProtectedAreas
 } from "../services/protectedAreasService";
 
-function AdminProtectedAreasPage() {
+function ProtectedAreasPage() {
 
   const [areas, setAreas] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -20,6 +22,7 @@ function AdminProtectedAreasPage() {
       try {
 
         const data = await getProtectedAreas();
+
         setAreas(data);
 
       } catch (error) {
@@ -40,24 +43,39 @@ function AdminProtectedAreasPage() {
 
   return (
 
-    <Layout title="Administración de Áreas Protegidas">
+    <Layout title="Áreas Protegidas">
 
-      <p>
+      <Breadcrumb
+        items={[
+          { label: "Inicio", to: "/" },
+          { label: "Áreas Protegidas" }
+        ]}
+      />
 
-        Desde este módulo podrá administrar las áreas protegidas
-        utilizadas para la generación de los catálogos de restauración.
-
-      </p>
+      <Link
+        to="/"
+        className="primary-button"
+      >
+        ← Inicio
+      </Link>
 
       <br />
+      <br />
 
-      <PrimaryButton>
+      <Link
+        to="/admin/areas"
+      >
 
-        + Nueva Área Protegida
+        <PrimaryButton>
 
-      </PrimaryButton>
+          Administrar Áreas
 
-      <hr />
+        </PrimaryButton>
+
+      </Link>
+
+      <br />
+      <br />
 
       {loading ? (
 
@@ -86,4 +104,6 @@ function AdminProtectedAreasPage() {
 
 }
 
-export default AdminProtectedAreasPage;
+export default ProtectedAreasPage;
+
+
