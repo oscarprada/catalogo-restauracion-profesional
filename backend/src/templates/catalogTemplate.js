@@ -83,7 +83,10 @@ const referencesHTML =
 
             return `
 
-<section class="species-card">
+<section
+    id="species-${item.id}"
+    class="species-card"
+>
 
 ${coverImage ? `
 
@@ -268,9 +271,56 @@ class="logo"
 
 <h2>${area.name}</h2>
 
+<p><strong>Código:</strong> ${area.code ?? ""}</p>
+
+<p><strong>Categoría:</strong> ${area.category ?? ""}</p>
+
+<p><strong>Región:</strong> ${area.region ?? ""}</p>
+
+<p><strong>Departamento:</strong> ${area.department ?? ""}</p>
+
+<p><strong>Municipio(s):</strong> ${area.municipality ?? ""}</p>
+
 <p>${area.description ?? ""}</p>
 
+<p>
+
+<strong>Número de especies registradas:</strong>
+
+${species.length}
+
+</p>
+
+<p>
+
+<strong>Fecha de generación:</strong>
+
+${new Date().toLocaleDateString("es-CO")}
+
+</p>
+
 </header>
+
+<h2>Índice de especies</h2>
+
+<ul class="index-list">
+
+${species.map((item) => `
+
+<li>
+
+<a href="#species-${item.id}">
+
+${item.common_name}
+
+</a>
+
+</li>
+
+`).join("")}
+
+</ul>
+
 
 ${speciesHTML}
 
@@ -282,5 +332,7 @@ ${speciesHTML}
 `;
 
 }
+
+
 
 

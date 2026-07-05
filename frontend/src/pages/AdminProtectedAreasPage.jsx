@@ -1,8 +1,11 @@
+import { Link } from "react-router-dom";
+
 import { useEffect, useState } from "react";
 
 import Layout from "../components/Layout";
 import PrimaryButton from "../components/PrimaryButton";
-import ProtectedAreaCard from "../components/ProtectedAreaCard";
+import AdminProtectedAreaCard from "../components/AdminProtectedAreaCard";
+import NewProtectedAreaPage from "../pages/NewProtectedAreaPage";
 
 import {
   getProtectedAreas
@@ -11,6 +14,7 @@ import {
 function AdminProtectedAreasPage() {
 
   const [areas, setAreas] = useState([]);
+
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -20,6 +24,7 @@ function AdminProtectedAreasPage() {
       try {
 
         const data = await getProtectedAreas();
+
         setAreas(data);
 
       } catch (error) {
@@ -42,22 +47,18 @@ function AdminProtectedAreasPage() {
 
     <Layout title="Administración de Áreas Protegidas">
 
-      <p>
+    <Link to="/admin/areas/new">
 
-        Desde este módulo podrá administrar las áreas protegidas
-        utilizadas para la generación de los catálogos de restauración.
+  <PrimaryButton>
 
-      </p>
+    Nueva Área Protegida
 
-      <br />
+  </PrimaryButton>
 
-      <PrimaryButton>
+</Link>
 
-        + Nueva Área Protegida
-
-      </PrimaryButton>
-
-      <hr />
+<br />
+<br />
 
       {loading ? (
 
@@ -69,7 +70,7 @@ function AdminProtectedAreasPage() {
 
           {areas.map((area) => (
 
-            <ProtectedAreaCard
+            <AdminProtectedAreaCard
               key={area.id}
               area={area}
             />

@@ -1,7 +1,9 @@
 import { query } from "../config/db.js";
 
 export async function getProtectedAreas(req, res) {
+
   try {
+
     const sql = `
       SELECT *
       FROM protected_areas
@@ -13,6 +15,7 @@ export async function getProtectedAreas(req, res) {
     res.json(result.rows);
 
   } catch (error) {
+
     console.error("ERROR getProtectedAreas:", error);
 
     res.status(500).json({
@@ -21,24 +24,33 @@ export async function getProtectedAreas(req, res) {
       detail: error.detail ?? null,
       code: error.code ?? null
     });
+
   }
+
 }
 
 export async function getProtectedAreaById(req, res) {
+
   try {
 
     const { id } = req.params;
 
     const result = await query(
-      `SELECT * FROM protected_areas WHERE id=$1`,
+      `
+      SELECT *
+      FROM protected_areas
+      WHERE id = $1;
+      `,
       [id]
     );
 
     if (result.rows.length === 0) {
+
       return res.status(404).json({
         success: false,
-        message: "Área protegida no encontrada"
+        message: "Área protegida no encontrada."
       });
+
     }
 
     res.json(result.rows[0]);
@@ -53,6 +65,7 @@ export async function getProtectedAreaById(req, res) {
     });
 
   }
+
 }
 
 export async function createProtectedArea(req, res) {
@@ -63,6 +76,7 @@ export async function createProtectedArea(req, res) {
       code,
       name,
       category,
+      region,
       department,
       municipality,
       description
@@ -75,17 +89,22 @@ export async function createProtectedArea(req, res) {
         code,
         name,
         category,
+        region,
         department,
         municipality,
         description
       )
-      VALUES ($1,$2,$3,$4,$5,$6)
+      VALUES
+      (
+        $1,$2,$3,$4,$5,$6,$7
+      )
       RETURNING *;
       `,
       [
         code,
         name,
         category,
+        region,
         department,
         municipality,
         description
@@ -117,6 +136,7 @@ export async function updateProtectedArea(req, res) {
       code,
       name,
       category,
+      region,
       department,
       municipality,
       description
@@ -126,25 +146,36 @@ export async function updateProtectedArea(req, res) {
       `
       UPDATE protected_areas
       SET
-        code=$1,
-        name=$2,
-        category=$3,
-        department=$4,
-        municipality=$5,
-        description=$6
-      WHERE id=$7
+        code = $1,
+        name = $2,
+        category = $3,
+        region = $4,
+        department = $5,
+        municipality = $6,
+        description = $7
+      WHERE id = $8
       RETURNING *;
       `,
       [
         code,
         name,
         category,
+        region,
         department,
         municipality,
         description,
         id
       ]
     );
+
+    if (result.rows.length === 0) {
+
+      return res.status(404).json({
+        success: false,
+        message: "Área protegida no encontrada."
+      });
+
+    }
 
     res.json(result.rows[0]);
 
@@ -167,14 +198,28 @@ export async function deleteProtectedArea(req, res) {
 
     const { id } = req.params;
 
-    await query(
-      `DELETE FROM protected_areas WHERE id=$1`,
+    const result = await query(
+      `
+      DELETE
+      FROM protected_areas
+      WHERE id = $1
+      RETURNING *;
+      `,
       [id]
     );
 
+    if (result.rows.length === 0) {
+
+      return res.status(404).json({
+        success: false,
+        message: "Área protegida no encontrada."
+      });
+
+    }
+
     res.json({
       success: true,
-      message: "Área protegida eliminada"
+      message: "Área protegida eliminada."
     });
 
   } catch (error) {
@@ -189,3 +234,4 @@ export async function deleteProtectedArea(req, res) {
   }
 
 }
+
