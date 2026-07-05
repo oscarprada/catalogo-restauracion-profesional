@@ -11,15 +11,26 @@ export async function generateCatalog(area, species) {
         `catalog-${area.id}`
     );
 
-    const assetsFolder = path.join(
+    const assetsImagesFolder = path.join(
         publicationFolder,
         "assets",
         "images"
     );
 
-    await fs.mkdir(assetsFolder, {
+    const speciesImagesFolder = path.join(
+        publicationFolder,
+        "images"
+    );
+
+    await fs.mkdir(assetsImagesFolder, {
         recursive: true
     });
+
+    await fs.mkdir(speciesImagesFolder, {
+        recursive: true
+    });
+
+    // Logo institucional
 
     await fs.copyFile(
         path.join(
@@ -29,10 +40,53 @@ export async function generateCatalog(area, species) {
             "parques-logo.png"
         ),
         path.join(
-            assetsFolder,
+            assetsImagesFolder,
             "parques-logo.png"
         )
     );
+
+    // Copiar imágenes de especies
+
+    for (const item of species) {
+
+        if (!item.images) continue;
+
+        for (const image of item.images) {
+
+            const fileName = path.basename(image.image_url);
+
+            const source = path.join(
+                process.cwd(),
+                image.image_url.replace(/^\//, "")
+            );
+
+            const destination = path.join(
+                speciesImagesFolder,
+                fileName
+            );
+
+            try {
+
+                await fs.copyFile(
+                    source,
+                    destination
+                );
+
+                image.catalog_url =
+                    `images/${fileName}`;
+
+            } catch (error) {
+
+                console.error(
+                    "No fue posible copiar:",
+                    source
+                );
+
+            }
+
+        }
+
+    }
 
     const html = buildCatalogHTML(
         area,

@@ -7,10 +7,6 @@ export async function publishProtectedArea(req, res) {
 
         const { id } = req.params;
 
-        // ==========================
-        // Área protegida
-        // ==========================
-
         const areaResult = await query(
             `
             SELECT *
@@ -31,10 +27,6 @@ export async function publishProtectedArea(req, res) {
 
         const area = areaResult.rows[0];
 
-        // ==========================
-        // Especies del área
-        // ==========================
-
         const speciesResult = await query(
             `
             SELECT *
@@ -47,9 +39,22 @@ export async function publishProtectedArea(req, res) {
 
         const species = speciesResult.rows;
 
-        // ==========================
-        // Generar catálogo
-        // ==========================
+        for (const item of species) {
+
+            const images = await query(
+                `
+                SELECT *
+                FROM species_images
+                WHERE species_id = $1
+                ORDER BY is_cover DESC,
+                         display_order ASC;
+                `,
+                [item.id]
+            );
+
+            item.images = images.rows;
+
+        }
 
         const publication = await generateCatalog(
             area,
@@ -75,3 +80,4 @@ export async function publishProtectedArea(req, res) {
     }
 
 }
+

@@ -2,32 +2,75 @@ export function buildCatalogHTML(area, species) {
 
     const speciesHTML = species.length === 0
 
-        ? `
-            <p>No existen especies registradas para esta área protegida.</p>
-          `
+        ? `<p>No existen especies registradas para esta área protegida.</p>`
 
-        : species.map((item) => `
-            <article class="species-card">
+        : species.map((item) => {
 
-                <h3>${item.common_name}</h3>
+            const coverImage =
+                item.images && item.images.length > 0
+                    ? item.images[0].catalog_url
+                    : null;
 
-                <p>
-                    <strong>Nombre científico:</strong>
-                    <em>${item.scientific_name ?? ""}</em>
-                </p>
+            return `
 
-                <p>
-                    <strong>Familia:</strong>
-                    ${item.family ?? ""}
-                </p>
+<section class="species-card">
 
-                <p>
-                    <strong>Descripción:</strong><br>
-                    ${item.description ?? ""}
-                </p>
+${coverImage ? `
 
-            </article>
-        `).join("");
+<img
+    src="${coverImage}"
+    class="species-image"
+    alt="${item.common_name}"
+>
+
+` : ""}
+
+<h2>${item.common_name}</h2>
+
+<p><strong>Nombre científico:</strong> <em>${item.scientific_name}</em></p>
+
+<p><strong>Familia:</strong> ${item.family ?? ""}</p>
+
+<p><strong>Categoría:</strong> ${item.category ?? ""}</p>
+
+<p><strong>Ecosistema:</strong> ${item.ecosystem ?? ""}</p>
+
+<p><strong>Estado de conservación:</strong> ${item.conservation_status ?? ""}</p>
+
+<p><strong>Método de propagación:</strong> ${item.propagation_method ?? ""}</p>
+
+<h3>Descripción</h3>
+<p>${item.description ?? ""}</p>
+
+<h3>Hábitat</h3>
+<p>${item.habitat ?? ""}</p>
+
+<h3>Distribución</h3>
+<p>${item.distribution ?? ""}</p>
+
+<h3>Floración</h3>
+<p>${item.flowering_period ?? ""}</p>
+
+<h3>Fructificación</h3>
+<p>${item.fruiting_period ?? ""}</p>
+
+<h3>Importancia ecológica</h3>
+<p>${item.ecological_importance ?? ""}</p>
+
+<h3>Uso en restauración</h3>
+<p>${item.restoration_use ?? ""}</p>
+
+<h3>Recomendaciones</h3>
+<p>${item.care_recommendations ?? ""}</p>
+
+<h3>Observaciones</h3>
+<p>${item.observations ?? ""}</p>
+
+</section>
+
+`;
+
+        }).join("");
 
     return `
 <!DOCTYPE html>
@@ -38,128 +81,79 @@ export function buildCatalogHTML(area, species) {
 
 <meta charset="UTF-8">
 
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
-
 <title>${area.name}</title>
 
 <style>
 
-*{
-    box-sizing:border-box;
-}
-
 body{
 
-    margin:0;
-
-    padding:40px;
-
-    background:#f5f7f4;
-
-    font-family:Arial,Helvetica,sans-serif;
-
-    color:#222;
+font-family:Arial,Helvetica,sans-serif;
+background:#f5f7f4;
+margin:0;
+padding:40px;
+color:#222;
 
 }
 
 .container{
 
-    max-width:1200px;
-
-    margin:auto;
+max-width:1200px;
+margin:auto;
 
 }
 
 header{
 
-    background:white;
-
-    border-radius:12px;
-
-    padding:40px;
-
-    margin-bottom:40px;
-
-    box-shadow:0 2px 10px rgba(0,0,0,.08);
-
-    text-align:center;
+background:white;
+padding:40px;
+border-radius:12px;
+text-align:center;
+margin-bottom:40px;
 
 }
 
 .logo{
 
-    width:130px;
-
-    margin-bottom:20px;
-
-}
-
-h1{
-
-    color:#2cab87;
-
-    margin-bottom:5px;
-
-}
-
-h2{
-
-    color:#71b956;
-
-    margin-top:0;
-
-}
-
-.area-name{
-
-    font-size:28px;
-
-    margin-top:30px;
-
-    color:#222;
-
-}
-
-.description{
-
-    margin-top:20px;
-
-    color:#555;
-
-    line-height:1.7;
-
-}
-
-section{
-
-    margin-top:50px;
-
-}
-
-.section-title{
-
-    color:#2cab87;
-
-    border-bottom:3px solid #2cab87;
-
-    padding-bottom:10px;
-
-    margin-bottom:25px;
+width:120px;
 
 }
 
 .species-card{
 
-    background:white;
+background:white;
+padding:30px;
+margin-top:30px;
+border-radius:12px;
+box-shadow:0 2px 8px rgba(0,0,0,.08);
 
-    border-radius:12px;
+}
 
-    padding:25px;
+.species-image{
 
-    margin-bottom:25px;
+width:100%;
+max-width:500px;
+display:block;
+margin:0 auto 25px;
+border-radius:12px;
 
-    box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+h1{
+
+color:#2cab87;
+
+}
+
+h2{
+
+color:#2cab87;
+
+}
+
+h3{
+
+margin-top:25px;
+color:#71b956;
 
 }
 
@@ -174,40 +168,21 @@ section{
 <header>
 
 <img
-    src="assets/images/parques-logo.png"
-    class="logo"
-    alt="Parques Nacionales Naturales de Colombia"
-/>
+src="assets/images/parques-logo.png"
+class="logo"
+>
 
 <h1>Parques Nacionales Naturales de Colombia</h1>
 
 <h2>Catálogo de Restauración Ecológica</h2>
 
-<div class="area-name">
+<h2>${area.name}</h2>
 
-${area.name}
-
-</div>
-
-<div class="description">
-
-${area.description ?? ""}
-
-</div>
+<p>${area.description ?? ""}</p>
 
 </header>
 
-<section>
-
-<h2 class="section-title">
-
-Especies del Área Protegida
-
-</h2>
-
 ${speciesHTML}
-
-</section>
 
 </div>
 
@@ -218,4 +193,6 @@ ${speciesHTML}
 `;
 
 }
+
+
 
