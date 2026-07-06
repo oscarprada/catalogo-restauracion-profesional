@@ -26,11 +26,21 @@ function AdminProtectedAreaCard({ area, onDelete }) {
 
         <div className="button-group">
 
+          <Link to={`/admin/areas/${area.id}/species`}>
+
+            <PrimaryButton>
+
+              Gestionar Especies
+
+            </PrimaryButton>
+
+          </Link>
+
           <Link to={`/admin/areas/${area.id}/edit`}>
 
             <PrimaryButton>
 
-              Editar
+              Editar Área
 
             </PrimaryButton>
 
@@ -40,7 +50,7 @@ function AdminProtectedAreaCard({ area, onDelete }) {
             onClick={() => onDelete(area)}
           >
 
-            Eliminar
+            Eliminar Área
 
           </PrimaryButton>
 
@@ -55,5 +65,6 @@ function AdminProtectedAreaCard({ area, onDelete }) {
 }
 
 export default AdminProtectedAreaCard;
+
 
 
