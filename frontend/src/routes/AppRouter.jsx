@@ -9,6 +9,7 @@ import NewProtectedAreaPage from "../pages/NewProtectedAreaPage";
 import EditProtectedAreaPage from "../pages/EditProtectedAreaPage";
 import AdminSpeciesPage from "../pages/AdminSpeciesPage";
 import NewSpeciesPage from "../pages/NewSpeciesPage";
+import EditSpeciesPage from "../pages/EditSpeciesPage";
 
 function AppRouter() {
   return (
@@ -50,6 +51,11 @@ function AppRouter() {
         <Route
         path="/admin/areas/:id/species/new"
         element={<NewSpeciesPage />}
+        />
+
+        <Route
+        path="/admin/areas/:id/species/:speciesId/edit"
+         element={<EditSpeciesPage />}
         />
 
         <Route

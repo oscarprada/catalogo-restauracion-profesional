@@ -3,9 +3,11 @@ import { Link, useParams } from "react-router-dom";
 
 import Layout from "../components/Layout";
 import PrimaryButton from "../components/PrimaryButton";
+import AdminSpeciesCard from "../components/AdminSpeciesCard";
 
 import {
-  getSpeciesByArea
+  getSpeciesByArea,
+  deleteSpecies
 } from "../services/speciesService";
 
 function AdminSpeciesPage() {
@@ -15,31 +17,57 @@ function AdminSpeciesPage() {
   const [species, setSpecies] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
+  async function loadSpecies() {
 
-    async function loadSpecies() {
+    try {
 
-      try {
+      const data = await getSpeciesByArea(id);
 
-        const data = await getSpeciesByArea(id);
+      setSpecies(data);
 
-        setSpecies(data);
+    } catch (error) {
 
-      } catch (error) {
+      console.error(error);
 
-        console.error(error);
+    } finally {
 
-      } finally {
-
-        setLoading(false);
-
-      }
+      setLoading(false);
 
     }
+
+  }
+
+  useEffect(() => {
 
     loadSpecies();
 
   }, [id]);
+
+  async function handleDelete(species) {
+
+    const confirmDelete = window.confirm(
+      `¿Está seguro de eliminar la especie "${species.common_name}"?`
+    );
+
+    if (!confirmDelete) {
+      return;
+    }
+
+    try {
+
+      await deleteSpecies(species.id);
+
+      alert("Especie eliminada correctamente.");
+
+      loadSpecies();
+
+    } catch (error) {
+
+      alert(error.message);
+
+    }
+
+  }
 
   return (
 
@@ -79,23 +107,20 @@ function AdminSpeciesPage() {
 
       ) : (
 
-        <ul>
+        <div className="areas-grid">
 
           {species.map(item => (
 
-            <li key={item.id}>
-
-              <strong>{item.common_name}</strong>
-
-              <br />
-
-              <em>{item.scientific_name}</em>
-
-            </li>
+            <AdminSpeciesCard
+              key={item.id}
+              species={item}
+              areaId={id}
+              onDelete={handleDelete}
+            />
 
           ))}
 
-        </ul>
+        </div>
 
       )}
 

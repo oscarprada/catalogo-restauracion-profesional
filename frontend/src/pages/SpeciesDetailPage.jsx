@@ -7,6 +7,7 @@ import SpeciesGallery from "../components/SpeciesGallery";
 import ImageUploader from "../components/ImageUploader";
 import SpeciesExperiences from "../components/SpeciesExperiences";
 import SpeciesReferences from "../components/SpeciesReferences";
+import PrimaryButton from "../components/PrimaryButton";
 
 function SpeciesDetailPage() {
 
@@ -14,6 +15,7 @@ function SpeciesDetailPage() {
 
   const [species, setSpecies] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [catalogReady, setCatalogReady] = useState(false);
 
   useEffect(() => {
 
@@ -45,6 +47,31 @@ function SpeciesDetailPage() {
 
   }, [id]);
 
+async function generateCatalog() {
+
+  try {
+
+    const response = await fetch(
+      `http://localhost:3000/api/publications/${species.protected_area_id}`
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message);
+    }
+
+    alert("Catálogo generado correctamente.");
+
+    setCatalogReady(true);
+
+  } catch (error) {
+
+    alert(error.message);
+
+  }
+
+}
   if (loading) {
     return (
       <Layout title="Especie">
@@ -95,7 +122,35 @@ function SpeciesDetailPage() {
               <em>{species.scientific_name}</em>
             </h2>
 
-            <hr />
+
+           <PrimaryButton
+  onClick={generateCatalog}
+>
+
+  Generar Catálogo
+
+              </PrimaryButton>
+
+              <br />
+              <br />
+
+              {catalogReady && (
+
+                <a
+                  href={`http://localhost:3000/publications/catalog-${species.protected_area_id}/index.html`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="primary-button"
+                >
+                  Abrir Catálogo
+                </a>
+
+              )}
+
+              <br />
+              <br />
+
+              <hr />
 
             <p><strong>Familia:</strong> {species.family}</p>
             <p><strong>Categoría:</strong> {species.category}</p>

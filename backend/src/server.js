@@ -23,6 +23,10 @@ app.use(
   "/uploads",
   express.static(path.resolve("uploads"))
 );
+app.use(
+  "/publications",
+  express.static(path.resolve("publications"))
+);
 
 app.get("/", (req, res) => {
   res.json({
