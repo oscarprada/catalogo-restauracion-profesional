@@ -136,21 +136,37 @@ async function generateCatalog() {
 
               {catalogReady && (
 
-                <a
-                  href={`http://localhost:3000/publications/catalog-${species.protected_area_id}/index.html`}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="primary-button"
-                >
-                  Abrir Catálogo
-                </a>
+  <>
 
-              )}
+              <a
+                href={`http://localhost:3000/publications/catalog-${species.protected_area_id}/index.html`}
+                target="_blank"
+                rel="noreferrer"
+                className="primary-button"
+              >
+                Abrir Catálogo
+              </a>
 
               <br />
               <br />
 
-              <hr />
+              <a
+                href={`http://localhost:3000/publications/catalog-${species.protected_area_id}/catalog.pdf`}
+                target="_blank"
+                rel="noreferrer"
+                className="primary-button"
+              >
+                Abrir PDF
+              </a>
+
+            </>
+
+          )}
+
+          <br />
+          <br />
+
+          <hr />
 
             <p><strong>Familia:</strong> {species.family}</p>
             <p><strong>Categoría:</strong> {species.category}</p>

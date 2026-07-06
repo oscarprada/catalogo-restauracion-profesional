@@ -1,5 +1,6 @@
 import { query } from "../config/db.js";
 import { generateCatalog } from "../services/htmlGenerator.js";
+import { generatePDF } from "../services/pdfGenerator.js";
 
 export async function publishProtectedArea(req, res) {
 
@@ -86,16 +87,21 @@ export async function publishProtectedArea(req, res) {
         }
 
         const publication = await generateCatalog(
-            area,
-            species
-        );
+    area,
+    species
+);
 
-        res.json({
-            success: true,
-            area: area.name,
-            species: species.length,
-            folder: publication.folder
-        });
+     const pdf = await generatePDF(
+        publication.folder
+    );
+
+    res.json({
+        success: true,
+        area: area.name,
+        species: species.length,
+        folder: publication.folder,
+        pdf: pdf.pdf
+    });
 
     } catch (error) {
 
